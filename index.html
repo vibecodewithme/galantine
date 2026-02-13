@@ -99,7 +99,11 @@ to{transform:translateY(-110vh);opacity:0;}
 
 /* envelope open */
 function openEnvelope(){
+const env=document.getElementById("env");
+const card=document.getElementById("card");
+
 env.classList.add("open");
+
 setTimeout(()=>{
 env.style.display="none";
 card.style.display="block";
@@ -110,15 +114,15 @@ card.style.display="block";
 function moveBtn(){
 let b=document.querySelector(".no");
 if(!b) return;
-b.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+b.style.transform=translate(${Math.random()*200-100}px,${Math.random()*200-100}px);
 }
 
-/* show galentine questions */
+/* show form */
 function showForm(){
-card.innerHTML=`
+document.getElementById("card").innerHTML=`
 <h3>💞 Galentine Questions</h3>
 
-<form onsubmit="saveAnswers(event)">
+<form onsubmit="sendEmail(event)">
 
 😂 Our funniest memory?
 <textarea required></textarea>
@@ -135,18 +139,18 @@ card.innerHTML=`
 💌 One bestie promise?
 <textarea required></textarea>
 
-<button class="submit">Save Galentine Love 💖</button>
+<button class="submit">Send Galentine Love 💖</button>
 </form>`;
 }
 
-/* save answers */
-function saveAnswers(e){
+/* send email */
+function sendEmail(e){
 e.preventDefault();
 
 let a=[...document.querySelectorAll("textarea")]
 .map(t=>t.value);
 
-let result=
+let body=
 "💕 Galentine Memories 💕\n\n"+
 "Funny memory: "+a[0]+"\n\n"+
 "Iconic vibe: "+a[1]+"\n\n"+
@@ -154,12 +158,8 @@ let result=
 "Favorite activity: "+a[3]+"\n\n"+
 "Promise: "+a[4];
 
-localStorage.setItem("galentineAnswers",result);
-
-card.innerHTML=
-"<h2>💖 Besties Forever!</h2>"+
-"<textarea style='height:200px;'>"+result+"</textarea>"+
-"<p>Copy & share with your Galentine 💕</p>";
+window.location.href=
+"mailto:sakshi.raorane_19@sakec.ac.in?subject=Galentine Love 💖&body="+encodeURIComponent(body);
 
 confetti();
 }
