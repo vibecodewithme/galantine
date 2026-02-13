@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Galentine 💕</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ffb6c1,#ffd6e0);
+font-family:sans-serif;
+overflow:hidden;
+}
+
+/* envelope */
+.envelope{
+width:220px;
+height:140px;
+background:#ff69b4;
+position:relative;
+cursor:pointer;
+border-radius:6px;
+}
+
+.flap{
+position:absolute;
+width:100%;
+height:100%;
+background:#ff85c1;
+clip-path:polygon(0 0,100% 0,50% 60%);
+transform-origin:top;
+transition:.6s;
+}
+
+.open .flap{transform:rotateX(180deg);}
+
+/* card */
+.card{
+display:none;
+background:white;
+padding:25px;
+border-radius:20px;
+width:340px;
+box-shadow:0 15px 30px rgba(0,0,0,.25);
+position:absolute;
+z-index:10;
+}
+
+textarea{
+width:100%;
+margin:6px 0;
+padding:8px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.yes{background:#ff69b4;color:white;}
+.no{background:#ddd;position:absolute;}
+.submit{background:#ff69b4;color:white;width:100%;}
+
+/* floating hearts */
+.heart{
+position:fixed;
+bottom:-20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+to{transform:translateY(-110vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openEnvelope()" id="env">
+<div class="flap"></div>
+</div>
+
+<div class="card" id="card">
+<h2>💖 Will you be my Galentine?</h2>
+<button class="yes" onclick="showForm()">Obviously! 💕</button>
+<button class="no" onmouseover="moveBtn()">Nope 🙈</button>
+</div>
+
+<script>
+
+/* envelope open */
+function openEnvelope(){
+env.classList.add("open");
+setTimeout(()=>{
+env.style.display="none";
+card.style.display="block";
+},600);
+}
+
+/* runaway no button */
+function moveBtn(){
+let b=document.querySelector(".no");
+if(!b) return;
+b.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+}
+
+/* show galentine questions */
+function showForm(){
+card.innerHTML=`
+<h3>💞 Galentine Questions</h3>
+
+<form onsubmit="saveAnswers(event)">
+
+😂 Our funniest memory?
+<textarea required></textarea>
+
+✨ What makes our friendship iconic?
+<textarea required></textarea>
+
+🌈 Dream girls trip?
+<textarea required></textarea>
+
+🍿 Favorite thing we do together?
+<textarea required></textarea>
+
+💌 One bestie promise?
+<textarea required></textarea>
+
+<button class="submit">Save Galentine Love 💖</button>
+</form>`;
+}
+
+/* save answers */
+function saveAnswers(e){
+e.preventDefault();
+
+let a=[...document.querySelectorAll("textarea")]
+.map(t=>t.value);
+
+let result=
+"💕 Galentine Memories 💕\n\n"+
+"Funny memory: "+a[0]+"\n\n"+
+"Iconic vibe: "+a[1]+"\n\n"+
+"Dream trip: "+a[2]+"\n\n"+
+"Favorite activity: "+a[3]+"\n\n"+
+"Promise: "+a[4];
+
+localStorage.setItem("galentineAnswers",result);
+
+card.innerHTML=
+"<h2>💖 Besties Forever!</h2>"+
+"<textarea style='height:200px;'>"+result+"</textarea>"+
+"<p>Copy & share with your Galentine 💕</p>";
+
+confetti();
+}
+
+/* floating hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💗";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},500);
+
+/* confetti */
+function confetti(){
+for(let i=0;i<30;i++){
+let c=document.createElement("div");
+c.innerHTML="💖";
+c.style.position="fixed";
+c.style.left=Math.random()*100+"vw";
+c.style.top="-10px";
+c.style.animation="float 3s linear";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),3000);
+}
+}
+
+</script>
+
+</body>
+</html>
