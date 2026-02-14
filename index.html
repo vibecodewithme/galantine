@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>galentine 💖</title>
+<title>Galentine 💖</title>
 
 <style>
 body{
@@ -94,7 +94,7 @@ to{transform:translateY(-110vh);opacity:0;}
 </div>
 
 <div class="card" id="card">
-<h2>🌹 Will you be my galentine?</h2>
+<h2>🌹 Will you be my Galentine?</h2>
 <button class="yes" onclick="showForm()">Yes 💘</button>
 <button class="no" onmouseover="moveBtn()">No 🙈</button>
 </div>
@@ -122,7 +122,6 @@ document.getElementById("card").innerHTML=`
 <h3>💞 Galentine Questions</h3>
 
 <form onsubmit="sendEmail(event)">
-
 😂 Our funniest memory?
 <textarea required></textarea>
 
@@ -138,7 +137,7 @@ document.getElementById("card").innerHTML=`
 💌 One bestie promise?
 <textarea required></textarea>
 
-<button class="submit">Send Galentine Love 💖</button>
+<button class="submit">Submit 💌</button>
 </form>`;
 }
 
@@ -150,15 +149,15 @@ let answers=[...document.querySelectorAll("textarea")]
 .map(t=>t.value);
 
 let body=
-"💕 Galentine Memories 💕\n\n"+
-"Funny memory: "+a[0]+"\n\n"+
-"Iconic vibe: "+a[1]+"\n\n"+
-"Dream trip: "+a[2]+"\n\n"+
-"Favorite activity: "+a[3]+"\n\n"+
-"Promise: "+a[4];
+"Galentine Answers 💖\n\n"+
+"Funny memory: "+answers[0]+"\n\n"+
+"Iconic vibe: "+answers[1]+"\n\n"+
+"Dream trip: "+answers[2]+"\n\n"+
+"Favorite activity: "+answers[3]+"\n\n"+
+"Promise: "+answers[4];
 
 window.location.href=
-`mailto:sakshi.raorane_19@sakec.ac.in?subject=galentine Answers 💌&body=${encodeURIComponent(body)}`;
+`mailto:sakshi.raorane_19@sakec.ac.in?subject=Galentine Answers 💌&body=${encodeURIComponent(body)}`;
 
 launchConfetti();
 }
@@ -178,7 +177,7 @@ function launchConfetti(){
 for(let i=0;i<30;i++){
 let c=document.createElement("div");
 c.innerHTML="💗";
-c.style.position="fixed";
+c.style.position="fixed";b
 c.style.left=Math.random()*100+"vw";
 c.style.top="-10px";
 c.style.animation="float 3s linear";
